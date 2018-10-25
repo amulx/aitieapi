@@ -11,10 +11,26 @@ class User extends NotORM {
             ->order('create_date DESC')
             ->fetchAll();
     }
+
+    /**
+     * [getNameById 根据用户ID获取用户姓名]
+     * @param  [int] $id [用户id]
+     * @return [string]     [用户姓名]
+     */
     public function getNameById($id) {
-        $row = $this->getORM($id)->select('name')->fetchRow();
+        $row = $this->getORM($id)->select('name')->where('id =?',$id)->fetchRow();
         return !empty($row) ? $row['name'] : '';
     }
+
+    /**
+     * [getGoldById 根据用户ID用户用户金币]
+     * @param  [int] $id [用户ID]
+     * @return [int]     [当前用户所拥有的金币]
+     */
+    public function getGoldById($id) {
+        $row = $this->getORM($id)->select('gold')->where('id =?',$id)->fetchRow();
+        return !empty($row) ? $row['gold'] : 0;
+    }    
 
     public function querybysql($sql){
 		$rows = $this->getORM()->queryAll($sql, array());
@@ -40,15 +56,20 @@ class User extends NotORM {
         return $this->getORM()->where('id = ?', $id)->where('password = ?', md5($password))->fetchRow();
     }    
 
+    /**
+     * [M_Login 用户登录接口]
+     * @param [string] $username [用户名]
+     * @param [string] $password [用户密码]
+     */
     public function M_Login($username,$password){
         return $this->getORM()->where('username = ?', $username)->where('password= ?',$password)->fetchRow();
     }
 
     /**
      * [M_register 用户注册接口]
-     * @param [type] $username    [description]
-     * @param [type] $password    [description]
-     * @param [type] $phonenumber [description]
+     * @param [string] $username    [用户名]
+     * @param [string] $password    [密码]
+     * @param [string] $phonenumber [手机号码]
      */
     public function M_register($username,$password,$phonenumber){
         $increment_id = $this->insert(
@@ -112,5 +133,26 @@ class User extends NotORM {
 
         $rs = $orm->update($update_arr);
         return $rs;     
-    }    
+    }
+
+    /**
+     * [modifGoldById 修改用户账号金币]
+     * @param  [int] $uid  [用户ID]
+     * @param  [bool] $type [增加 or 减少]
+     * @param  [int] $gold [金币数量]
+     * @return [int]       [影响记录行]
+     */
+    public function modifGoldById($uid,$type,$gold){
+        if ($type) {
+            $rs = $this->getORM()->where('id', $uid)->update(array('gold' => new \NotORM_Literal("gold+".$gold)));
+        } else {
+            $rs = $this->getORM()->where('id', $uid)->update(array('gold' => new \NotORM_Literal("gold-".$gold)));
+        }      
+        
+        return $rs;
+    }
+
+    public function forHomePage($uid){
+        return $this->getORM()->select('username,userimage,sex,gold')->where('id = ?',$uid)->fetchOne();
+    }
 }

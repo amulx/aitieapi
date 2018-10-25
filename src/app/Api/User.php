@@ -25,6 +25,25 @@ class User extends Api {
             ),
             'userinfomodify' => array(
                 'password' => array('name' => 'password', 'require' => true, 'min' => 4, 'max' => 12, 'desc' => '密码')
+            ),
+            'delPublish' => array(
+                'topicids' => array('name' => 'topicids', 'require' => true, 'type' => 'array', 'format' => 'explode', 'separator' => ',','desc' => '需要删除的爱贴ids')
+            ),
+            'myCollection' => array(
+                'page' => array('name' => 'page', 'type'=>'int','require' => true, 'min' => 1, 'desc' => '当前是第几页，初始为1'),
+                'pagesize' => array('name' => 'pagesize', 'type'=>'int','require' => true, 'min' => 1, 'desc' => '每页显示多少条')
+            ),
+            'consumeHistory' => array(
+                'page' => array('name' => 'page', 'type'=>'int','require' => true, 'min' => 1, 'desc' => '当前是第几页，初始为1'),
+                'pagesize' => array('name' => 'pagesize', 'type'=>'int','require' => true, 'min' => 1, 'desc' => '每页显示多少条')
+            ),
+            'homePage' => array(
+                'uid' => array('name' => 'uid', 'type'=>'int','require' => true, 'min' => 1, 'desc' => '发布者ID')
+            ),
+            'userPublish' => array(
+                'uid' => array('name' => 'uid', 'type'=>'int','require' => true, 'min' => 1, 'desc' => '发布者ID'),
+                'page' => array('name' => 'page', 'type'=>'int','require' => true, 'min' => 1, 'desc' => '当前是第几页，初始为1'),
+                'pagesize' => array('name' => 'pagesize', 'type'=>'int','require' => true, 'min' => 1, 'desc' => '每页显示多少条')
             )
         );
     }
@@ -134,5 +153,57 @@ class User extends Api {
         } else {
             throw new \PhalApi\Exception\InternalServerErrorException('当前用户名不存在', 10);
         }      
+    }
+
+    public function delPublish(){
+        $TopicModel = new \App\Model\Topic();
+        $rs = $TopicModel->delTopic($this->topicids,intval($GLOBALS['userInfo']['uid']));
+        return ['rs'=>$rs];
+    }
+
+    /**
+     * [myCollection 我的收藏]
+     * @return [type] [description]
+     */
+    public function myCollection(){
+        $TopicModel = new \App\Model\Topic();
+        return $TopicModel->myCollections(intval($GLOBALS['userInfo']['uid']),$this->page,$this->pagesize);
+    }
+
+    /**
+     * [consumeHistory 我的消费记录/购买历史]
+     * @return [type] [description]
+     */
+    public function consumeHistory(){
+        $TopicModel = new \App\Model\Topic();
+        return $TopicModel->myConsume(intval($GLOBALS['userInfo']['uid']),$this->page,$this->pagesize);
+    }
+
+    /**
+     * [myGold 我的金币]
+     * @return [array] [description]
+     */
+    public function myGold(){
+        $model = new \App\Model\User();
+        $gold = $model->getGoldById(intval($GLOBALS['userInfo']['uid']));
+        return ['gold'=>$gold];
+    }
+
+    /**
+     * [homePage 个人主页]
+     * @return [type] [description]
+     */
+    public function homePage(){
+        $model = new \App\Model\User();
+        return $model->forHomePage($this->uid);
+    }
+
+    /**
+     * [userPublish 用户发布的贴吧]
+     * @return [type] [description]
+     */
+    public function userPublish(){
+        $TopicModel = new \App\Model\Topic();
+        return $TopicModel->userPublish($this->uid,$this->page,$this->pagesize);
     }
 }
