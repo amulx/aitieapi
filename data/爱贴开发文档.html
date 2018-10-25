@@ -1,0 +1,1091 @@
+﻿<!DOCTYPE html>
+<html>
+<head>  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=0">
+  <meta name="author" content="微信公众号：不惑小年轻">
+  <meta name="email" content="897416591@qq.com">
+  <meta name="description" content="爱贴接口开发文档">
+  <title>爱贴接口开发文档</title>  
+  <style type="text/css" id="markdown_preview_css"> 
+ .output_wrapper pre code{font-family: Consolas, Inconsolata, Courier, monospace; display: block !important; white-space: pre !important; word-wrap: normal !important; word-break: normal !important;  overflow: auto !important;}  
+.output_wrapper a:hover { text-decoration: underline; color: rgb(0, 96, 100); }
+.output_wrapper figcaption { margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em; }
+.output_wrapper pre code .linenum { padding-right: 20px; word-spacing: 0px; }
+.task-list-list { list-style-type: none; }
+.task-list-list.checked { color: rgb(62, 62, 62); }
+.task-list-list.uncheck { color: rgb(191, 193, 191); }
+.task-list-list .icon_uncheck, .task-list-list .icon_check { display: inline-block; vertical-align: middle; margin-right: 10px; }
+.task-list-list .icon_check::before { content: "√"; border: 2px solid rgb(62, 62, 62); color: red; }
+.task-list-list .icon_uncheck::before { content: "x"; border: 2px solid rgb(191, 193, 191); color: rgb(191, 193, 191); }
+.task-list-list .icon_check::before, .task-list-list .icon_uncheck::before { padding: 2px 8px 2px 5px; border-radius: 5px; }
+@font-face { font-family: KaTeX_AMS; src: url("fonts/KaTeX_AMS-Regular.woff2") format("woff2"), url("fonts/KaTeX_AMS-Regular.woff") format("woff"), url("fonts/KaTeX_AMS-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@font-face { font-family: KaTeX_Caligraphic; src: url("fonts/KaTeX_Caligraphic-Bold.woff2") format("woff2"), url("fonts/KaTeX_Caligraphic-Bold.woff") format("woff"), url("fonts/KaTeX_Caligraphic-Bold.ttf") format("truetype"); font-weight: bold; font-style: normal; }
+@font-face { font-family: KaTeX_Caligraphic; src: url("fonts/KaTeX_Caligraphic-Regular.woff2") format("woff2"), url("fonts/KaTeX_Caligraphic-Regular.woff") format("woff"), url("fonts/KaTeX_Caligraphic-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@font-face { font-family: KaTeX_Fraktur; src: url("fonts/KaTeX_Fraktur-Bold.woff2") format("woff2"), url("fonts/KaTeX_Fraktur-Bold.woff") format("woff"), url("fonts/KaTeX_Fraktur-Bold.ttf") format("truetype"); font-weight: bold; font-style: normal; }
+@font-face { font-family: KaTeX_Fraktur; src: url("fonts/KaTeX_Fraktur-Regular.woff2") format("woff2"), url("fonts/KaTeX_Fraktur-Regular.woff") format("woff"), url("fonts/KaTeX_Fraktur-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@font-face { font-family: KaTeX_Main; src: url("fonts/KaTeX_Main-Bold.woff2") format("woff2"), url("fonts/KaTeX_Main-Bold.woff") format("woff"), url("fonts/KaTeX_Main-Bold.ttf") format("truetype"); font-weight: bold; font-style: normal; }
+@font-face { font-family: KaTeX_Main; src: url("fonts/KaTeX_Main-BoldItalic.woff2") format("woff2"), url("fonts/KaTeX_Main-BoldItalic.woff") format("woff"), url("fonts/KaTeX_Main-BoldItalic.ttf") format("truetype"); font-weight: bold; font-style: italic; }
+@font-face { font-family: KaTeX_Main; src: url("fonts/KaTeX_Main-Italic.woff2") format("woff2"), url("fonts/KaTeX_Main-Italic.woff") format("woff"), url("fonts/KaTeX_Main-Italic.ttf") format("truetype"); font-weight: normal; font-style: italic; }
+@font-face { font-family: KaTeX_Main; src: url("fonts/KaTeX_Main-Regular.woff2") format("woff2"), url("fonts/KaTeX_Main-Regular.woff") format("woff"), url("fonts/KaTeX_Main-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@font-face { font-family: KaTeX_Math; src: url("fonts/KaTeX_Math-BoldItalic.woff2") format("woff2"), url("fonts/KaTeX_Math-BoldItalic.woff") format("woff"), url("fonts/KaTeX_Math-BoldItalic.ttf") format("truetype"); font-weight: bold; font-style: italic; }
+@font-face { font-family: KaTeX_Math; src: url("fonts/KaTeX_Math-Italic.woff2") format("woff2"), url("fonts/KaTeX_Math-Italic.woff") format("woff"), url("fonts/KaTeX_Math-Italic.ttf") format("truetype"); font-weight: normal; font-style: italic; }
+@font-face { font-family: KaTeX_SansSerif; src: url("fonts/KaTeX_SansSerif-Bold.woff2") format("woff2"), url("fonts/KaTeX_SansSerif-Bold.woff") format("woff"), url("fonts/KaTeX_SansSerif-Bold.ttf") format("truetype"); font-weight: bold; font-style: normal; }
+@font-face { font-family: KaTeX_SansSerif; src: url("fonts/KaTeX_SansSerif-Italic.woff2") format("woff2"), url("fonts/KaTeX_SansSerif-Italic.woff") format("woff"), url("fonts/KaTeX_SansSerif-Italic.ttf") format("truetype"); font-weight: normal; font-style: italic; }
+@font-face { font-family: KaTeX_SansSerif; src: url("fonts/KaTeX_SansSerif-Regular.woff2") format("woff2"), url("fonts/KaTeX_SansSerif-Regular.woff") format("woff"), url("fonts/KaTeX_SansSerif-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@font-face { font-family: KaTeX_Script; src: url("fonts/KaTeX_Script-Regular.woff2") format("woff2"), url("fonts/KaTeX_Script-Regular.woff") format("woff"), url("fonts/KaTeX_Script-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@font-face { font-family: KaTeX_Size1; src: url("fonts/KaTeX_Size1-Regular.woff2") format("woff2"), url("fonts/KaTeX_Size1-Regular.woff") format("woff"), url("fonts/KaTeX_Size1-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@font-face { font-family: KaTeX_Size2; src: url("fonts/KaTeX_Size2-Regular.woff2") format("woff2"), url("fonts/KaTeX_Size2-Regular.woff") format("woff"), url("fonts/KaTeX_Size2-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@font-face { font-family: KaTeX_Size3; src: url("fonts/KaTeX_Size3-Regular.woff2") format("woff2"), url("fonts/KaTeX_Size3-Regular.woff") format("woff"), url("fonts/KaTeX_Size3-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@font-face { font-family: KaTeX_Size4; src: url("fonts/KaTeX_Size4-Regular.woff2") format("woff2"), url("fonts/KaTeX_Size4-Regular.woff") format("woff"), url("fonts/KaTeX_Size4-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@font-face { font-family: KaTeX_Typewriter; src: url("fonts/KaTeX_Typewriter-Regular.woff2") format("woff2"), url("fonts/KaTeX_Typewriter-Regular.woff") format("woff"), url("fonts/KaTeX_Typewriter-Regular.ttf") format("truetype"); font-weight: normal; font-style: normal; }
+@media screen {
+  .katex .mtable .vertical-separator { min-width: 1px; }
+  .katex .mfrac .frac-line, .katex .overline .overline-line, .katex .underline .underline-line, .katex .hline, .katex .hdashline, .katex .rule { min-height: 1px; }
+}
+.katex-display { display: block; margin: 1em 0px; text-align: center; }
+.katex-display > .katex { display: block; text-align: center; white-space: nowrap; }
+.katex-display > .katex > .katex-html { display: block; }
+.katex-display > .katex > .katex-html > .tag { position: absolute; right: 0px; }
+.katex { font: 1.21em/1.2 KaTeX_Main, "Times New Roman", serif; text-indent: 0px; text-rendering: auto; }
+.katex * { }
+.katex .katex-mathml { position: absolute; clip: rect(1px, 1px, 1px, 1px); padding: 0px; border: 0px; height: 1px; width: 1px; overflow: hidden; }
+.katex .katex-html { }
+.katex .katex-html > .newline { display: block; }
+.katex .base { position: relative; display: inline-block; white-space: nowrap; width: min-content; }
+.katex .strut { display: inline-block; }
+.katex .textbf { font-weight: bold; }
+.katex .textit { font-style: italic; }
+.katex .textrm { font-family: KaTeX_Main; }
+.katex .textsf { font-family: KaTeX_SansSerif; }
+.katex .texttt { font-family: KaTeX_Typewriter; }
+.katex .mathit { font-family: KaTeX_Math; font-style: italic; }
+.katex .mathrm { font-style: normal; }
+.katex .mathbf { font-family: KaTeX_Main; font-weight: bold; }
+.katex .boldsymbol { font-family: KaTeX_Math; font-weight: bold; font-style: italic; }
+.katex .amsrm { font-family: KaTeX_AMS; }
+.katex .mathbb, .katex .textbb { font-family: KaTeX_AMS; }
+.katex .mathcal { font-family: KaTeX_Caligraphic; }
+.katex .mathfrak, .katex .textfrak { font-family: KaTeX_Fraktur; }
+.katex .mathtt { font-family: KaTeX_Typewriter; }
+.katex .mathscr, .katex .textscr { font-family: KaTeX_Script; }
+.katex .mathsf, .katex .textsf { font-family: KaTeX_SansSerif; }
+.katex .mainit { font-family: KaTeX_Main; font-style: italic; }
+.katex .mainrm { font-family: KaTeX_Main; font-style: normal; }
+.katex .vlist-t { display: inline-table; table-layout: fixed; }
+.katex .vlist-r { display: table-row; }
+.katex .vlist { display: table-cell; vertical-align: bottom; position: relative; }
+.katex .vlist > span { display: block; height: 0px; position: relative; }
+.katex .vlist > span > span { display: inline-block; }
+.katex .vlist > span > .pstrut { overflow: hidden; width: 0px; }
+.katex .vlist-t2 { margin-right: -2px; }
+.katex .vlist-s { display: table-cell; vertical-align: bottom; font-size: 1px; width: 2px; min-width: 2px; }
+.katex .msupsub { text-align: left; }
+.katex .mfrac > span > span { text-align: center; }
+.katex .mfrac .frac-line { display: inline-block; width: 100%; border-bottom-style: solid; }
+.katex .mspace { display: inline-block; }
+.katex .llap, .katex .rlap, .katex .clap { width: 0px; position: relative; }
+.katex .llap > .inner, .katex .rlap > .inner, .katex .clap > .inner { position: absolute; }
+.katex .llap > .fix, .katex .rlap > .fix, .katex .clap > .fix { display: inline-block; }
+.katex .llap > .inner { right: 0px; }
+.katex .rlap > .inner, .katex .clap > .inner { left: 0px; }
+.katex .clap > .inner > span { margin-left: -50%; margin-right: 50%; }
+.katex .rule { display: inline-block; border: 0px solid; position: relative; }
+.katex .overline .overline-line, .katex .underline .underline-line, .katex .hline { display: inline-block; width: 100%; border-bottom-style: solid; }
+.katex .hdashline { display: inline-block; width: 100%; border-bottom-style: dashed; }
+.katex .sqrt > .root { margin-left: 0.277778em; margin-right: -0.555556em; }
+.katex .sizing, .katex .fontsize-ensurer { display: inline-block; }
+.katex .sizing.reset-size1.size1, .katex .fontsize-ensurer.reset-size1.size1 { font-size: 1em; }
+.katex .sizing.reset-size1.size2, .katex .fontsize-ensurer.reset-size1.size2 { font-size: 1.2em; }
+.katex .sizing.reset-size1.size3, .katex .fontsize-ensurer.reset-size1.size3 { font-size: 1.4em; }
+.katex .sizing.reset-size1.size4, .katex .fontsize-ensurer.reset-size1.size4 { font-size: 1.6em; }
+.katex .sizing.reset-size1.size5, .katex .fontsize-ensurer.reset-size1.size5 { font-size: 1.8em; }
+.katex .sizing.reset-size1.size6, .katex .fontsize-ensurer.reset-size1.size6 { font-size: 2em; }
+.katex .sizing.reset-size1.size7, .katex .fontsize-ensurer.reset-size1.size7 { font-size: 2.4em; }
+.katex .sizing.reset-size1.size8, .katex .fontsize-ensurer.reset-size1.size8 { font-size: 2.88em; }
+.katex .sizing.reset-size1.size9, .katex .fontsize-ensurer.reset-size1.size9 { font-size: 3.456em; }
+.katex .sizing.reset-size1.size10, .katex .fontsize-ensurer.reset-size1.size10 { font-size: 4.148em; }
+.katex .sizing.reset-size1.size11, .katex .fontsize-ensurer.reset-size1.size11 { font-size: 4.976em; }
+.katex .sizing.reset-size2.size1, .katex .fontsize-ensurer.reset-size2.size1 { font-size: 0.833333em; }
+.katex .sizing.reset-size2.size2, .katex .fontsize-ensurer.reset-size2.size2 { font-size: 1em; }
+.katex .sizing.reset-size2.size3, .katex .fontsize-ensurer.reset-size2.size3 { font-size: 1.16667em; }
+.katex .sizing.reset-size2.size4, .katex .fontsize-ensurer.reset-size2.size4 { font-size: 1.33333em; }
+.katex .sizing.reset-size2.size5, .katex .fontsize-ensurer.reset-size2.size5 { font-size: 1.5em; }
+.katex .sizing.reset-size2.size6, .katex .fontsize-ensurer.reset-size2.size6 { font-size: 1.66667em; }
+.katex .sizing.reset-size2.size7, .katex .fontsize-ensurer.reset-size2.size7 { font-size: 2em; }
+.katex .sizing.reset-size2.size8, .katex .fontsize-ensurer.reset-size2.size8 { font-size: 2.4em; }
+.katex .sizing.reset-size2.size9, .katex .fontsize-ensurer.reset-size2.size9 { font-size: 2.88em; }
+.katex .sizing.reset-size2.size10, .katex .fontsize-ensurer.reset-size2.size10 { font-size: 3.45667em; }
+.katex .sizing.reset-size2.size11, .katex .fontsize-ensurer.reset-size2.size11 { font-size: 4.14667em; }
+.katex .sizing.reset-size3.size1, .katex .fontsize-ensurer.reset-size3.size1 { font-size: 0.714286em; }
+.katex .sizing.reset-size3.size2, .katex .fontsize-ensurer.reset-size3.size2 { font-size: 0.857143em; }
+.katex .sizing.reset-size3.size3, .katex .fontsize-ensurer.reset-size3.size3 { font-size: 1em; }
+.katex .sizing.reset-size3.size4, .katex .fontsize-ensurer.reset-size3.size4 { font-size: 1.14286em; }
+.katex .sizing.reset-size3.size5, .katex .fontsize-ensurer.reset-size3.size5 { font-size: 1.28571em; }
+.katex .sizing.reset-size3.size6, .katex .fontsize-ensurer.reset-size3.size6 { font-size: 1.42857em; }
+.katex .sizing.reset-size3.size7, .katex .fontsize-ensurer.reset-size3.size7 { font-size: 1.71429em; }
+.katex .sizing.reset-size3.size8, .katex .fontsize-ensurer.reset-size3.size8 { font-size: 2.05714em; }
+.katex .sizing.reset-size3.size9, .katex .fontsize-ensurer.reset-size3.size9 { font-size: 2.46857em; }
+.katex .sizing.reset-size3.size10, .katex .fontsize-ensurer.reset-size3.size10 { font-size: 2.96286em; }
+.katex .sizing.reset-size3.size11, .katex .fontsize-ensurer.reset-size3.size11 { font-size: 3.55429em; }
+.katex .sizing.reset-size4.size1, .katex .fontsize-ensurer.reset-size4.size1 { font-size: 0.625em; }
+.katex .sizing.reset-size4.size2, .katex .fontsize-ensurer.reset-size4.size2 { font-size: 0.75em; }
+.katex .sizing.reset-size4.size3, .katex .fontsize-ensurer.reset-size4.size3 { font-size: 0.875em; }
+.katex .sizing.reset-size4.size4, .katex .fontsize-ensurer.reset-size4.size4 { font-size: 1em; }
+.katex .sizing.reset-size4.size5, .katex .fontsize-ensurer.reset-size4.size5 { font-size: 1.125em; }
+.katex .sizing.reset-size4.size6, .katex .fontsize-ensurer.reset-size4.size6 { font-size: 1.25em; }
+.katex .sizing.reset-size4.size7, .katex .fontsize-ensurer.reset-size4.size7 { font-size: 1.5em; }
+.katex .sizing.reset-size4.size8, .katex .fontsize-ensurer.reset-size4.size8 { font-size: 1.8em; }
+.katex .sizing.reset-size4.size9, .katex .fontsize-ensurer.reset-size4.size9 { font-size: 2.16em; }
+.katex .sizing.reset-size4.size10, .katex .fontsize-ensurer.reset-size4.size10 { font-size: 2.5925em; }
+.katex .sizing.reset-size4.size11, .katex .fontsize-ensurer.reset-size4.size11 { font-size: 3.11em; }
+.katex .sizing.reset-size5.size1, .katex .fontsize-ensurer.reset-size5.size1 { font-size: 0.555556em; }
+.katex .sizing.reset-size5.size2, .katex .fontsize-ensurer.reset-size5.size2 { font-size: 0.666667em; }
+.katex .sizing.reset-size5.size3, .katex .fontsize-ensurer.reset-size5.size3 { font-size: 0.777778em; }
+.katex .sizing.reset-size5.size4, .katex .fontsize-ensurer.reset-size5.size4 { font-size: 0.888889em; }
+.katex .sizing.reset-size5.size5, .katex .fontsize-ensurer.reset-size5.size5 { font-size: 1em; }
+.katex .sizing.reset-size5.size6, .katex .fontsize-ensurer.reset-size5.size6 { font-size: 1.11111em; }
+.katex .sizing.reset-size5.size7, .katex .fontsize-ensurer.reset-size5.size7 { font-size: 1.33333em; }
+.katex .sizing.reset-size5.size8, .katex .fontsize-ensurer.reset-size5.size8 { font-size: 1.6em; }
+.katex .sizing.reset-size5.size9, .katex .fontsize-ensurer.reset-size5.size9 { font-size: 1.92em; }
+.katex .sizing.reset-size5.size10, .katex .fontsize-ensurer.reset-size5.size10 { font-size: 2.30444em; }
+.katex .sizing.reset-size5.size11, .katex .fontsize-ensurer.reset-size5.size11 { font-size: 2.76444em; }
+.katex .sizing.reset-size6.size1, .katex .fontsize-ensurer.reset-size6.size1 { font-size: 0.5em; }
+.katex .sizing.reset-size6.size2, .katex .fontsize-ensurer.reset-size6.size2 { font-size: 0.6em; }
+.katex .sizing.reset-size6.size3, .katex .fontsize-ensurer.reset-size6.size3 { font-size: 0.7em; }
+.katex .sizing.reset-size6.size4, .katex .fontsize-ensurer.reset-size6.size4 { font-size: 0.8em; }
+.katex .sizing.reset-size6.size5, .katex .fontsize-ensurer.reset-size6.size5 { font-size: 0.9em; }
+.katex .sizing.reset-size6.size6, .katex .fontsize-ensurer.reset-size6.size6 { font-size: 1em; }
+.katex .sizing.reset-size6.size7, .katex .fontsize-ensurer.reset-size6.size7 { font-size: 1.2em; }
+.katex .sizing.reset-size6.size8, .katex .fontsize-ensurer.reset-size6.size8 { font-size: 1.44em; }
+.katex .sizing.reset-size6.size9, .katex .fontsize-ensurer.reset-size6.size9 { font-size: 1.728em; }
+.katex .sizing.reset-size6.size10, .katex .fontsize-ensurer.reset-size6.size10 { font-size: 2.074em; }
+.katex .sizing.reset-size6.size11, .katex .fontsize-ensurer.reset-size6.size11 { font-size: 2.488em; }
+.katex .sizing.reset-size7.size1, .katex .fontsize-ensurer.reset-size7.size1 { font-size: 0.416667em; }
+.katex .sizing.reset-size7.size2, .katex .fontsize-ensurer.reset-size7.size2 { font-size: 0.5em; }
+.katex .sizing.reset-size7.size3, .katex .fontsize-ensurer.reset-size7.size3 { font-size: 0.583333em; }
+.katex .sizing.reset-size7.size4, .katex .fontsize-ensurer.reset-size7.size4 { font-size: 0.666667em; }
+.katex .sizing.reset-size7.size5, .katex .fontsize-ensurer.reset-size7.size5 { font-size: 0.75em; }
+.katex .sizing.reset-size7.size6, .katex .fontsize-ensurer.reset-size7.size6 { font-size: 0.833333em; }
+.katex .sizing.reset-size7.size7, .katex .fontsize-ensurer.reset-size7.size7 { font-size: 1em; }
+.katex .sizing.reset-size7.size8, .katex .fontsize-ensurer.reset-size7.size8 { font-size: 1.2em; }
+.katex .sizing.reset-size7.size9, .katex .fontsize-ensurer.reset-size7.size9 { font-size: 1.44em; }
+.katex .sizing.reset-size7.size10, .katex .fontsize-ensurer.reset-size7.size10 { font-size: 1.72833em; }
+.katex .sizing.reset-size7.size11, .katex .fontsize-ensurer.reset-size7.size11 { font-size: 2.07333em; }
+.katex .sizing.reset-size8.size1, .katex .fontsize-ensurer.reset-size8.size1 { font-size: 0.347222em; }
+.katex .sizing.reset-size8.size2, .katex .fontsize-ensurer.reset-size8.size2 { font-size: 0.416667em; }
+.katex .sizing.reset-size8.size3, .katex .fontsize-ensurer.reset-size8.size3 { font-size: 0.486111em; }
+.katex .sizing.reset-size8.size4, .katex .fontsize-ensurer.reset-size8.size4 { font-size: 0.555556em; }
+.katex .sizing.reset-size8.size5, .katex .fontsize-ensurer.reset-size8.size5 { font-size: 0.625em; }
+.katex .sizing.reset-size8.size6, .katex .fontsize-ensurer.reset-size8.size6 { font-size: 0.694444em; }
+.katex .sizing.reset-size8.size7, .katex .fontsize-ensurer.reset-size8.size7 { font-size: 0.833333em; }
+.katex .sizing.reset-size8.size8, .katex .fontsize-ensurer.reset-size8.size8 { font-size: 1em; }
+.katex .sizing.reset-size8.size9, .katex .fontsize-ensurer.reset-size8.size9 { font-size: 1.2em; }
+.katex .sizing.reset-size8.size10, .katex .fontsize-ensurer.reset-size8.size10 { font-size: 1.44028em; }
+.katex .sizing.reset-size8.size11, .katex .fontsize-ensurer.reset-size8.size11 { font-size: 1.72778em; }
+.katex .sizing.reset-size9.size1, .katex .fontsize-ensurer.reset-size9.size1 { font-size: 0.289352em; }
+.katex .sizing.reset-size9.size2, .katex .fontsize-ensurer.reset-size9.size2 { font-size: 0.347222em; }
+.katex .sizing.reset-size9.size3, .katex .fontsize-ensurer.reset-size9.size3 { font-size: 0.405093em; }
+.katex .sizing.reset-size9.size4, .katex .fontsize-ensurer.reset-size9.size4 { font-size: 0.462963em; }
+.katex .sizing.reset-size9.size5, .katex .fontsize-ensurer.reset-size9.size5 { font-size: 0.520833em; }
+.katex .sizing.reset-size9.size6, .katex .fontsize-ensurer.reset-size9.size6 { font-size: 0.578704em; }
+.katex .sizing.reset-size9.size7, .katex .fontsize-ensurer.reset-size9.size7 { font-size: 0.694444em; }
+.katex .sizing.reset-size9.size8, .katex .fontsize-ensurer.reset-size9.size8 { font-size: 0.833333em; }
+.katex .sizing.reset-size9.size9, .katex .fontsize-ensurer.reset-size9.size9 { font-size: 1em; }
+.katex .sizing.reset-size9.size10, .katex .fontsize-ensurer.reset-size9.size10 { font-size: 1.20023em; }
+.katex .sizing.reset-size9.size11, .katex .fontsize-ensurer.reset-size9.size11 { font-size: 1.43981em; }
+.katex .sizing.reset-size10.size1, .katex .fontsize-ensurer.reset-size10.size1 { font-size: 0.24108em; }
+.katex .sizing.reset-size10.size2, .katex .fontsize-ensurer.reset-size10.size2 { font-size: 0.289296em; }
+.katex .sizing.reset-size10.size3, .katex .fontsize-ensurer.reset-size10.size3 { font-size: 0.337512em; }
+.katex .sizing.reset-size10.size4, .katex .fontsize-ensurer.reset-size10.size4 { font-size: 0.385728em; }
+.katex .sizing.reset-size10.size5, .katex .fontsize-ensurer.reset-size10.size5 { font-size: 0.433944em; }
+.katex .sizing.reset-size10.size6, .katex .fontsize-ensurer.reset-size10.size6 { font-size: 0.48216em; }
+.katex .sizing.reset-size10.size7, .katex .fontsize-ensurer.reset-size10.size7 { font-size: 0.578592em; }
+.katex .sizing.reset-size10.size8, .katex .fontsize-ensurer.reset-size10.size8 { font-size: 0.694311em; }
+.katex .sizing.reset-size10.size9, .katex .fontsize-ensurer.reset-size10.size9 { font-size: 0.833173em; }
+.katex .sizing.reset-size10.size10, .katex .fontsize-ensurer.reset-size10.size10 { font-size: 1em; }
+.katex .sizing.reset-size10.size11, .katex .fontsize-ensurer.reset-size10.size11 { font-size: 1.19961em; }
+.katex .sizing.reset-size11.size1, .katex .fontsize-ensurer.reset-size11.size1 { font-size: 0.200965em; }
+.katex .sizing.reset-size11.size2, .katex .fontsize-ensurer.reset-size11.size2 { font-size: 0.241158em; }
+.katex .sizing.reset-size11.size3, .katex .fontsize-ensurer.reset-size11.size3 { font-size: 0.28135em; }
+.katex .sizing.reset-size11.size4, .katex .fontsize-ensurer.reset-size11.size4 { font-size: 0.321543em; }
+.katex .sizing.reset-size11.size5, .katex .fontsize-ensurer.reset-size11.size5 { font-size: 0.361736em; }
+.katex .sizing.reset-size11.size6, .katex .fontsize-ensurer.reset-size11.size6 { font-size: 0.401929em; }
+.katex .sizing.reset-size11.size7, .katex .fontsize-ensurer.reset-size11.size7 { font-size: 0.482315em; }
+.katex .sizing.reset-size11.size8, .katex .fontsize-ensurer.reset-size11.size8 { font-size: 0.578778em; }
+.katex .sizing.reset-size11.size9, .katex .fontsize-ensurer.reset-size11.size9 { font-size: 0.694534em; }
+.katex .sizing.reset-size11.size10, .katex .fontsize-ensurer.reset-size11.size10 { font-size: 0.833601em; }
+.katex .sizing.reset-size11.size11, .katex .fontsize-ensurer.reset-size11.size11 { font-size: 1em; }
+.katex .delimsizing.size1 { font-family: KaTeX_Size1; }
+.katex .delimsizing.size2 { font-family: KaTeX_Size2; }
+.katex .delimsizing.size3 { font-family: KaTeX_Size3; }
+.katex .delimsizing.size4 { font-family: KaTeX_Size4; }
+.katex .delimsizing.mult .delim-size1 > span { font-family: KaTeX_Size1; }
+.katex .delimsizing.mult .delim-size4 > span { font-family: KaTeX_Size4; }
+.katex .nulldelimiter { display: inline-block; width: 0.12em; }
+.katex .delimcenter { position: relative; }
+.katex .op-symbol { position: relative; }
+.katex .op-symbol.small-op { font-family: KaTeX_Size1; }
+.katex .op-symbol.large-op { font-family: KaTeX_Size2; }
+.katex .op-limits > .vlist-t { text-align: center; }
+.katex .accent > .vlist-t { text-align: center; }
+.katex .accent .accent-body:not(.accent-full) { width: 0px; }
+.katex .accent .accent-body { position: relative; }
+.katex .overlay { display: block; }
+.katex .mtable .vertical-separator { display: inline-block; margin: 0px -0.025em; border-right: 0.05em solid; }
+.katex .mtable .vs-dashed { border-right: 0.05em dashed; }
+.katex .mtable .arraycolsep { display: inline-block; }
+.katex .mtable .col-align-c > .vlist-t { text-align: center; }
+.katex .mtable .col-align-l > .vlist-t { text-align: left; }
+.katex .mtable .col-align-r > .vlist-t { text-align: right; }
+.katex .svg-align { text-align: left; }
+.katex svg, .screenShotTempCanvas { display: block; position: absolute; width: 100%; height: inherit; fill: currentcolor; stroke: currentcolor; fill-rule: nonzero; fill-opacity: 1; stroke-width: 1; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-dashoffset: 0; stroke-opacity: 1; }
+.katex svg path { stroke: none; }
+.katex .stretchy { width: 100%; display: block; position: relative; overflow: hidden; }
+.katex .stretchy::before, .katex .stretchy::after { content: ""; }
+.katex .hide-tail { width: 100%; position: relative; overflow: hidden; }
+.katex .halfarrow-left { position: absolute; left: 0px; width: 50.2%; overflow: hidden; }
+.katex .halfarrow-right { position: absolute; right: 0px; width: 50.2%; overflow: hidden; }
+.katex .brace-left { position: absolute; left: 0px; width: 25.1%; overflow: hidden; }
+.katex .brace-center { position: absolute; left: 25%; width: 50%; overflow: hidden; }
+.katex .brace-right { position: absolute; right: 0px; width: 25.1%; overflow: hidden; }
+.katex .x-arrow-pad { padding: 0px 0.5em; }
+.katex .x-arrow, .katex .mover, .katex .munder { text-align: center; }
+.katex .boxpad { padding: 0px 0.3em; }
+.katex .fbox { box-sizing: border-box; border: 0.04em solid black; }
+.katex .fcolorbox { box-sizing: border-box; border: 0.04em solid; }
+.katex .cancel-pad { padding: 0px 0.2em; }
+.katex .cancel-lap { margin-left: -0.2em; margin-right: -0.2em; }
+.katex .sout { border-bottom-style: solid; border-bottom-width: 0.08em; } 
+.output_wrapper .hljs{color: rgb(169, 183, 198); background: rgb(40, 43, 46); display: block; overflow-x: auto; padding: 0.5em;}
+
+.output_wrapper .hljs-params{color: rgb(255, 152, 35);}
+
+.output_wrapper .hljs-number,.output_wrapper  .hljs-literal,.output_wrapper  .hljs-symbol,.output_wrapper  .hljs-bullet{color: rgb(174, 135, 250);}
+
+.output_wrapper .hljs-function,.output_wrapper  .hljs-built_in,.output_wrapper  .hljs-name,.output_wrapper  .hljs-keyword,.output_wrapper  .hljs-selector-tag,.output_wrapper  .hljs-deletion{color: rgb(248, 35, 117);}
+
+.output_wrapper .hljs-variable,.output_wrapper  .hljs-template-variable,.output_wrapper  .hljs-link{color: rgb(98, 151, 85);}
+
+.output_wrapper .hljs-comment,.output_wrapper  .hljs-quote{color: rgb(128, 128, 128);}
+
+.output_wrapper .hljs-meta{color: rgb(91, 218, 237);}
+
+.output_wrapper .hljs-string,.output_wrapper  .hljs-attribute,.output_wrapper  .hljs-addition{color: rgb(238, 220, 112);}
+
+.output_wrapper .hljs-attr,.output_wrapper  .hljs-section,.output_wrapper  .hljs-title,.output_wrapper  .hljs-type{color: rgb(165, 218, 45);}
+
+.output_wrapper .hljs-selector-class{color: rgb(165, 218, 45);}
+
+.output_wrapper .hljs-emphasis{font-style: italic;}
+
+.output_wrapper .hljs-strong{font-weight: bold;}
+ 
+.output_wrapper pre code {line-height: 15px; font-size: 11px; font-weight: normal; word-spacing: -3px; letter-spacing: 0px;} 
+.output_wrapper{font-size: 16px; color: rgb(62, 62, 62); line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;}
+
+.output_wrapper *{font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;}
+
+.output_wrapper p{margin: 1.5em 0px;}
+
+.output_wrapper h1,.output_wrapper  h2,.output_wrapper  h3,.output_wrapper  h4,.output_wrapper  h5,.output_wrapper  h6{margin: 1.5em 0px; font-weight: bold;}
+
+.output_wrapper h1{font-size: 1.6em;}
+
+.output_wrapper h2{font-size: 1.4em;}
+
+.output_wrapper h3{font-size: 1.3em;}
+
+.output_wrapper h4{font-size: 1.2em;}
+
+.output_wrapper h5{font-size: 1em;}
+
+.output_wrapper h6{font-size: 1em;}
+
+.output_wrapper h3{margin-bottom: 2em; margin-right: 5px; padding: 8px 15px; letter-spacing: 2px; background-image: linear-gradient(to right bottom, rgb(0, 188, 212), rgb(63, 81, 181)); background-color: rgb(63, 81, 181); color: rgb(255, 255, 255); border-left: 10px solid rgb(51, 51, 51); border-radius: 5px; text-shadow: rgb(102, 102, 102) 1px 1px 1px; box-shadow: rgb(102, 102, 102) 1px 1px 2px;}
+
+.output_wrapper ul,.output_wrapper  ol{padding-left: 32px;}
+
+.output_wrapper ul{list-style-type: disc;}
+
+.output_wrapper ol{list-style-type: decimal;}
+
+.output_wrapper li *{}
+
+.output_wrapper li{margin-bottom: 0.5em;}
+
+.output_wrapper .code_size_default{line-height: 18px; font-size: 14px; font-weight: normal; word-spacing: 0px; letter-spacing: 0px;}
+
+.output_wrapper .code_size_tight{line-height: 15px; font-size: 11px; font-weight: normal; word-spacing: -3px; letter-spacing: 0px;}
+
+.output_wrapper pre code{font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px;}
+
+.output_wrapper blockquote{display: block; padding: 15px 15px 15px 1rem; font-size: 0.9em; margin: 1em 0px; color: rgb(129, 145, 152); border-left: 6px solid rgb(220, 230, 240); background: rgb(242, 247, 251); overflow: auto; word-wrap: normal; word-break: normal;}
+
+.output_wrapper blockquote p{margin: 0px;}
+
+.output_wrapper a{text-decoration: none; color: rgb(30, 107, 184); word-wrap: break-word;}
+
+.output_wrapper strong{font-weight: bold;}
+
+.output_wrapper em{font-style: italic;}
+
+.output_wrapper del{font-style: italic;}
+
+.output_wrapper strong em{font-weight: bold;}
+
+.output_wrapper hr{height: 1px; margin: 1.5rem 0px; border-right: none; border-bottom: none; border-left: none; border-image: initial; border-top: 1px dashed rgb(165, 165, 165);}
+
+.output_wrapper code{word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0px 2px; color: rgb(233, 105, 0); background: rgb(248, 248, 248);}
+
+.output_wrapper img{display: block; margin: 0px auto; max-width: 100%;}
+
+.output_wrapper figcaption{margin-top: 10px; text-align: center; color: rgb(153, 153, 153); font-size: 0.7em;}
+
+.output_wrapper table{display: table; width: 100%; text-align: left;}
+
+.output_wrapper tbody{border: 0px;}
+
+.output_wrapper table tr{border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(204, 204, 204); background-color: white;}
+
+.output_wrapper table tr th,.output_wrapper  table tr td{font-size: 1em; border: 1px solid rgb(204, 204, 204); padding: 0.5em 1em; text-align: left;}
+
+.output_wrapper table tr th{font-weight: bold; background-color: rgb(240, 240, 240);}
+
+.output_wrapper .katex-display{font-size: 1.22em;}
+
+.output_wrapper .katex{padding: 8px 3px;}
+
+.output_wrapper .katex-display > .katex{display: inline-block; text-align: center; padding: 3px;}
+
+.output_wrapper .katex img{display: inline-block; vertical-align: middle;}
+
+.output_wrapper a[href^="#"] sup{vertical-align: super; margin: 0px 2px; padding: 1px 3px; color: rgb(255, 255, 255); background: rgb(102, 102, 102); font-size: 0.7em;}
+
+.output_wrapper .task-list-list{list-style-type: none;}
+
+.output_wrapper .task-list-list.checked{color: rgb(62, 62, 62);}
+
+.output_wrapper .task-list-list.uncheck{color: rgb(191, 193, 191);}
+
+.output_wrapper .task-list-list .icon_uncheck,.output_wrapper  .task-list-list .icon_check{display: inline-block; vertical-align: middle; margin-right: 10px;}
+
+.output_wrapper .task-list-list .icon_check::before{content: "√"; border: 2px solid rgb(62, 62, 62); color: red;}
+
+.output_wrapper .task-list-list .icon_uncheck::before{content: "x"; border: 2px solid rgb(191, 193, 191); color: rgb(191, 193, 191);}
+
+.output_wrapper .task-list-list .icon_check::before,.output_wrapper  .task-list-list .icon_uncheck::before{padding: 2px 8px 2px 5px; border-radius: 5px;}
+
+.output_wrapper .toc{margin-left: 25px;}
+
+.output_wrapper .toc_item{display: block;}
+
+.output_wrapper .toc_left{margin-left: 25px;}
+ 
+</style>  
+  <style type="text/css" id="export_setting_css">body { width: 100%; margin: 0px; padding: 0px; background: rgb(81, 154, 178); }
+#export_content { margin: 40px 20%; padding: 20px; border: 1px solid rgb(149, 155, 111); background: rgb(255, 255, 255); }</style>  
+
+</head><body><div id="export_content"><div class="output_wrapper" id="output_wrapper_id"><h3 id="h"><span>接口状态码</span></h3>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>非法请求：缺少必要参数密码</td>
+</tr>
+<tr>
+<td>200</td>
+<td>正确响应</td>
+</tr>
+<tr>
+<td>510</td>
+<td>错误响应</td>
+</tr>
+<tr>
+<td>500</td>
+<td>服务器错误</td>
+</tr>
+<tr>
+<td>401</td>
+<td>token已过期</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="h-1"><span>用户注册接口</span></h3>
+<ul>
+<li><span>访问地址</span></li>
+</ul>
+<p><code>http://xx.xxx.xx.xx/?s=user.register</code></p>
+<ul>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>phonenumber</td>
+<td>手机号码</td>
+</tr>
+<tr>
+<td>password</td>
+<td>登录密码</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><p>POST</p></li>
+<li><p>GET</p>
+<p><code>http://xx.xxx.xx.xx/?s=user.register&amp;username=test&amp;phonenumber=18979580123&amp;password=test</code></p></li></ul></li>
+<li><p>返回结果</p>
+<ul>
+<li><span>用户名已存在时</span></li></ul>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">510</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[],<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">"当前用户名已被使用"</span><br><span class="linenum hljs-number">5</span>}<br></code></pre>
+<ul>
+<li><span>注册成功时</span></li></ul>
+<pre><code class="hljs json"><span class="linenum hljs-number"> 1</span>{<br><span class="linenum hljs-number"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number"> 3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number"> 4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"id"</span>:&nbsp;<span class="hljs-string">"3"</span>,<br><span class="linenum hljs-number"> 5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"username"</span>:&nbsp;<span class="hljs-string">"hello"</span>,<br><span class="linenum hljs-number"> 6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonenumber"</span>:&nbsp;<span class="hljs-string">"18979580123"</span>,<br><span class="linenum hljs-number"> 7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"userimage"</span>:&nbsp;<span class="hljs-string">""</span>,<br><span class="linenum hljs-number"> 8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-string">""</span>,<br><span class="linenum hljs-number"> 9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"sex"</span>:&nbsp;<span class="hljs-string">""</span>,<br><span class="linenum hljs-number">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"gold"</span>:&nbsp;<span class="hljs-number">10</span><br><span class="linenum hljs-number">11</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">12</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">13</span>}<br></code></pre></li>
+</ul>
+<h3 id="h-2"><span>用户登录接口</span></h3>
+<ul>
+<li><span>访问地址</span></li>
+</ul>
+<p><code>http://xx.xxx.xx.xx/?s=user.login</code></p>
+<ul>
+<li><span>请求参数</span></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>密码</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>请求方法</p>
+<ul>
+<li><p>POST</p></li>
+<li><p>GET</p></li></ul>
+<p><code>http://xx.xxx.xx.xx/?s=user.login&amp;username=lx&amp;password=test</code></p></li>
+<li><p>返回结果</p>
+<ul>
+<li><p>正确响应</p>
+<pre><code class="hljs json"><span class="linenum hljs-number"> 1</span>{<br><span class="linenum hljs-number"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number"> 3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number"> 4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"id"</span>:&nbsp;<span class="hljs-string">"1"</span>,<br><span class="linenum hljs-number"> 5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"username"</span>:&nbsp;<span class="hljs-string">"lx"</span>,<br><span class="linenum hljs-number"> 6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonenumber"</span>:&nbsp;<span class="hljs-string">"18979580123"</span>,<br><span class="linenum hljs-number"> 7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"password"</span>:&nbsp;<span class="hljs-string">"098f6bcd4621d373cade4e832627b4f6"</span>,<br><span class="linenum hljs-number"> 8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"userimage"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number"> 9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"sex"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"gold"</span>:&nbsp;<span class="hljs-string">"10"</span>,<br><span class="linenum hljs-number">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"create_time"</span>:&nbsp;<span class="hljs-string">"2018-10-19&nbsp;14:29:28"</span>,<br><span class="linenum hljs-number">13</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"token"</span>:&nbsp;<span class="hljs-string">"398eiC7Ucw3r83OjsCAPzg8AGVhyUfbKRRWA4lJC95mGJYLCqKxdsxqaX0v/23xdOKJTlXakErMpPm1gwRA"</span><br><span class="linenum hljs-number">14</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">15</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">16</span>}<br></code></pre></li>
+<li><p>错误响应</p></li></ul>
+<pre><code class="json language-json hljs"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">510</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[],<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">"用户名或者密码不存在"</span><br><span class="linenum hljs-number">5</span>}<br></code></pre></li>
+</ul>
+<h4 id="h-3"><span>找回密码</span></h4>
+<ul>
+<li><p>访问地址</p>
+<p><code>http://xx.xxx.xx.xx/?s=user.forgetPwd</code></p></li>
+<li><p>请求参数</p></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>phonenumber</td>
+<td>手机号码</td>
+</tr>
+<tr>
+<td>password</td>
+<td>需要更新的密码</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>请求方法</p>
+<ul>
+<li><p>POST</p></li>
+<li><p>GET</p>
+<pre><code class="hljs ruby"><span class="linenum hljs-number">1</span>&nbsp;&nbsp;&nbsp;&nbsp;<code><span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/xx.xxx.xx.xx/</span><span class="hljs-string">?s</span>=user.forgetPwd&amp;amp;username=lx&amp;amp;phonenumber=<span class="hljs-number">18979580123</span>&amp;amp;password=chengganggang</code><br></code></pre></li></ul></li>
+<li><p>返回结果</p>
+<ul>
+<li><p>更新成功</p>
+<pre><code class="json language-json hljs"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"res"</span>:&nbsp;<span class="hljs-number">1</span><br><span class="linenum hljs-number">5</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">7</span>}<br></code></pre></li>
+<li><p>相同数据，无更新</p>
+<pre><code class="json language-json hljs"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"res"</span>:&nbsp;<span class="hljs-number">0</span><br><span class="linenum hljs-number">5</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">7</span>}<br></code></pre></li>
+<li><p>更新失败</p>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">510</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[],<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">"更新失败"</span><br><span class="linenum hljs-number">5</span>}<br></code></pre></li></ul></li>
+<li><p>用户不存在</p>
+<pre><code class="json language-json hljs"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">510</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[],<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">"当前用户名不存在"</span><br><span class="linenum hljs-number">5</span>}<br></code></pre></li>
+</ul>
+<hr>
+<h4 id="h-4"><span>修改用户信息接口</span></h4>
+<ul>
+<li><p>访问地址</p>
+<p><code>http://xx.xxx.xx.xx/?s=user.userinfomodify</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>必须参数，秘钥</td>
+</tr>
+<tr>
+<td>username</td>
+<td>非必须参数，用户名</td>
+</tr>
+<tr>
+<td>phonenumber</td>
+<td>非必须参数，手机号码</td>
+</tr>
+<tr>
+<td>userimage</td>
+<td>非必须参数，用户头像</td>
+</tr>
+<tr>
+<td>wechat</td>
+<td>非必须参数，微信号</td>
+</tr>
+<tr>
+<td>sex</td>
+<td>非必须参数，性别（保密/男/女）</td>
+</tr>
+<tr>
+<td>password</td>
+<td>必须参数，用户密码</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><p>POST</p></li>
+<li><p>GET</p>
+<p><code>http://xx.xxx.xx.xx?token=d8b7E2OeezSoRn%2FJ8h0KQCyDfjW8vCyT4zDinVqC7yOaBmBK1pCdLOu7MoneomHPM4b0utevO%2F5pKrpftT8&amp;s=user.userinfomodify&amp;password=test&amp;phonenumber=18270634643</code></p></li></ul></li>
+<li><p>返回结果</p>
+<ul>
+<li><p>相同数据，无更新</p>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"res"</span>:&nbsp;<span class="hljs-number">0</span><br><span class="linenum hljs-number">5</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">7</span>}<br></code></pre></li>
+<li><p>更新成功</p>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number">3</span>&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"res"</span>:&nbsp;<span class="hljs-number">1</span><br><span class="linenum hljs-number">5</span>&nbsp;},<br><span class="linenum hljs-number">6</span>&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">7</span>}<br></code></pre></li>
+<li><p>更新失败</p>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">510</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[],<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">"更新失败"</span><br><span class="linenum hljs-number">5</span>}<br></code></pre></li>
+<li><p>用户名已被占用</p>
+<pre><code class="json language-json hljs"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">510</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[],<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">"当前用户名已被使用"</span><br><span class="linenum hljs-number">5</span>}<br></code></pre></li>
+<li><p>密码不正确</p>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">510</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[],<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">"当前用户密码不正确"</span><br><span class="linenum hljs-number">5</span>}<br></code></pre></li></ul></li>
+</ul>
+<hr>
+<h4 id="h-5"><span>爱贴首页</span></h4>
+<ul>
+<li><p>访问地址</p>
+<pre><code class="hljs cpp"><span class="linenum hljs-number">1</span>http:<span class="hljs-comment">//xx.xxx.xx.xx?s=topic.index</span><br></code></pre></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>非必须参数，爱贴标题</td>
+</tr>
+<tr>
+<td>type</td>
+<td>必须参数，排序方式（create_time/praise）</td>
+</tr>
+<tr>
+<td>page</td>
+<td>必须参数，当前页数，初始页为1</td>
+</tr>
+<tr>
+<td>pagesize</td>
+<td>必须参数，每页显示多少条</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><p>POST</p></li>
+<li><p>GET</p>
+<p><code>http://xx.xxx.xx.xx?s=topic.index&amp;token=99e8ga%2FA5iUgwIjz0FlIToeBq%2BOf4WCEpwp3Gx1zBPrvlBTuEeB3s3P9U0hiZnnYgLbqHAetDKjjNgSF0J0&amp;__debug__=1&amp;title&amp;type=create_time&amp;page=2&amp;pagesize=1</code></p></li></ul></li>
+<li><p>返回结果</p>
+<pre><code class="hljs json"><span class="linenum hljs-number"> 1</span>{<br><span class="linenum hljs-number"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number"> 3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[<br><span class="linenum hljs-number"> 4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br><span class="linenum hljs-number"> 5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"topicid"</span>:&nbsp;<span class="hljs-string">"2"</span>,<br><span class="linenum hljs-number"> 6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"uid"</span>:&nbsp;<span class="hljs-string">"1"</span>,<br><span class="linenum hljs-number"> 7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"title"</span>:&nbsp;<span class="hljs-string">"测试文章2"</span>,<br><span class="linenum hljs-number"> 8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"location"</span>:&nbsp;<span class="hljs-string">"黄埔大沙地"</span>,<br><span class="linenum hljs-number"> 9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-string">"微信号"</span>,<br><span class="linenum hljs-number">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatgold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phone"</span>:&nbsp;<span class="hljs-string">"18979580123"</span>,<br><span class="linenum hljs-number">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonegold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">13</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"content"</span>:&nbsp;<span class="hljs-string">"广东省广州市天河区"</span>,<br><span class="linenum hljs-number">14</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"praise"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"imagelist"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"create_time"</span>:&nbsp;<span class="hljs-string">"2018-10-19&nbsp;17:07:33"</span>,<br><span class="linenum hljs-number">17</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"collectnum"</span>:&nbsp;<span class="hljs-literal">null</span><br><span class="linenum hljs-number">18</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">19</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br><span class="linenum hljs-number">20</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"topicid"</span>:&nbsp;<span class="hljs-string">"1"</span>,<br><span class="linenum hljs-number">21</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"uid"</span>:&nbsp;<span class="hljs-string">"1"</span>,<br><span class="linenum hljs-number">22</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"title"</span>:&nbsp;<span class="hljs-string">"测试文章"</span>,<br><span class="linenum hljs-number">23</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"location"</span>:&nbsp;<span class="hljs-string">"广州天河"</span>,<br><span class="linenum hljs-number">24</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-string">"微信号"</span>,<br><span class="linenum hljs-number">25</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatgold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">26</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phone"</span>:&nbsp;<span class="hljs-string">"18979580123"</span>,<br><span class="linenum hljs-number">27</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonegold"</span>:&nbsp;<span class="hljs-string">"8"</span>,<br><span class="linenum hljs-number">28</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"content"</span>:&nbsp;<span class="hljs-string">"中华人民共和国"</span>,<br><span class="linenum hljs-number">29</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"praise"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">30</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"imagelist"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">31</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"create_time"</span>:&nbsp;<span class="hljs-string">"2018-10-19&nbsp;16:24:50"</span>,<br><span class="linenum hljs-number">32</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"collectnum"</span>:&nbsp;<span class="hljs-literal">null</span><br><span class="linenum hljs-number">33</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><span class="linenum hljs-number">34</span>&nbsp;&nbsp;&nbsp;&nbsp;],<br><span class="linenum hljs-number">35</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">36</span>}<br></code></pre></li>
+</ul>
+<hr>
+<h4 id="h-6"><span>发布贴吧</span></h4>
+<ul>
+<li><p>访问地址</p>
+<p><code>http://xx.xxx.xx.xx/?s=topic.publish</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>必须参数，标题</td>
+</tr>
+<tr>
+<td>location</td>
+<td>必须参数，地址</td>
+</tr>
+<tr>
+<td>wechat</td>
+<td>必须参数，微信</td>
+</tr>
+<tr>
+<td>wechatgold</td>
+<td>必须参数，购买微信所需金币</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>必须参数，电话</td>
+</tr>
+<tr>
+<td>phonegold</td>
+<td>必须参数，购买电话所需金币</td>
+</tr>
+<tr>
+<td>content</td>
+<td>必须参数，内容</td>
+</tr>
+<tr>
+<td>imagelist</td>
+<td>非必须参数，图片</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><p>POST</p></li>
+<li><p>GET</p>
+<p><code>http://xx.xxx.xx.xx/?s=topic.publish&amp;token=d8b7E2OeezSoRn%2FJ8h0KQCyDfjW8vCyT4zDinVqC7yOaBmBK1pCdLOu7MoneomHPM4b0utevO%2F5pKrpftT8&amp;title=%E9%83%A8%E8%90%BD%E5%86%B2%E7%AA%81&amp;location=%E7%8F%A0%E6%B1%9F%E6%96%B0%E5%9F%8E&amp;wechat=chenggang&amp;wechatgold=5&amp;phone=18979580123&amp;phonegold=8&amp;content=%E9%83%A8%E8%90%BD%E5%86%B2%E7%AA%81%E5%A5%BD%E5%A5%BD%E7%8E%A9%E9%83%A8%E8%90%BD%E5%86%B2%E7%AA%81%E5%A5%BD%E5%A5%BD%E7%8E%A9</code></p></li></ul></li>
+<li><p>返回结果</p>
+<ul>
+<li><p>发布成功</p>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"content"</span>:&nbsp;<span class="hljs-string">"部落冲突发布成功"</span><br><span class="linenum hljs-number">5</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">7</span>}<br></code></pre></li>
+<li><p>发布失败</p>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">510</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[],<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">"部落冲突发布失败"</span><br><span class="linenum hljs-number">5</span>}<br></code></pre></li></ul></li>
+</ul>
+<hr>
+<h3 id="h-7"><span>贴吧详情</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=topic.detail</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>topicid</td>
+<td>爱贴id</td>
+</tr>
+<tr>
+<td>token</td>
+<td>非必须参数</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>http://xx.xxx.xx.xx/?s=topic.detail&amp;amp;topicid=2</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number"> 1</span>{<br><span class="linenum hljs-number"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number"> 3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number"> 4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"topicid"</span>:&nbsp;<span class="hljs-string">"2"</span>,<br><span class="linenum hljs-number"> 5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"uid"</span>:&nbsp;<span class="hljs-string">"2"</span>,<br><span class="linenum hljs-number"> 6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"title"</span>:&nbsp;<span class="hljs-string">"夜跑珠江"</span>,<br><span class="linenum hljs-number"> 7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"location"</span>:&nbsp;<span class="hljs-string">"珠江新城"</span>,<br><span class="linenum hljs-number"> 8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-string">"bdchen"</span>,<br><span class="linenum hljs-number"> 9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatgold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatError"</span>:&nbsp;<span class="hljs-string">"4"</span>,<br><span class="linenum hljs-number">11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phone"</span>:&nbsp;<span class="hljs-string">"18270634643"</span>,<br><span class="linenum hljs-number">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonegold"</span>:&nbsp;<span class="hljs-string">"8"</span>,<br><span class="linenum hljs-number">13</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phoneError"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">14</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"content"</span>:&nbsp;<span class="hljs-string">"夜跑珠江好好玩"</span>,<br><span class="linenum hljs-number">15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"collectnum"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"praise"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">17</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"imagelist"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">18</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"create_time"</span>:&nbsp;<span class="hljs-string">"2018-10-23&nbsp;17:42:43"</span>,<br><span class="linenum hljs-number">19</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"username"</span>:&nbsp;<span class="hljs-string">"部落"</span>,<br><span class="linenum hljs-number">20</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"userimage"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">21</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"isBuyWechat"</span>:&nbsp;<span class="hljs-literal">false</span>,<br><span class="linenum hljs-number">22</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"isBuyPhone"</span>:&nbsp;<span class="hljs-literal">false</span>,<br><span class="linenum hljs-number">23</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"isPraise"</span>:&nbsp;<span class="hljs-literal">false</span>,<br><span class="linenum hljs-number">24</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"isCollection"</span>:&nbsp;<span class="hljs-literal">false</span><br><span class="linenum hljs-number">25</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">26</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">27</span>}<br></code></pre>
+<h3 id="h-8"><span>收藏与取消收藏贴吧</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=topic.collect</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isCollection</td>
+<td>必须参数，N:取消收藏，Y：收藏</td>
+</tr>
+<tr>
+<td>topicid</td>
+<td>爱贴ID</td>
+</tr>
+<tr>
+<td>token</td>
+<td>秘钥</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>http://xx.xxx.xx.xx/?s=topic.collect&amp;amp;topicid=2&amp;amp;isCollection=Y&amp;amp;token=b2c3eQyDEfkzs4QY7CG0I6cfZq91e2VF0QBCuvkH3AZQgNNjQE2T9WLXycrTLovkrl2lH8KQ/IQtUH9xINo</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"rs"</span>:&nbsp;<span class="hljs-number">0</span><br><span class="linenum hljs-number">5</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">7</span>}<br></code></pre>
+<h3 id="h-9"><span>报错贴吧</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=topic.reportError</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>必须参数，秘钥</td>
+</tr>
+<tr>
+<td>type</td>
+<td>必须参数，报错类型（wechat/phone）</td>
+</tr>
+<tr>
+<td>topicid</td>
+<td>必须参数，爱贴ID</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>http://xx.xxx.xx.xx/?s=topic.reportError&amp;amp;token=b2c3eQyDEfkzs4QY7CG0I6cfZq91e2VF0QBCuvkH3AZQgNNjQE2T9WLXycrTLovkrl2lH8KQ%2FIQtUH9xINo&amp;amp;type=phone&amp;amp;topicid=3</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatError"</span>:&nbsp;<span class="hljs-string">"3"</span>,<br><span class="linenum hljs-number">5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phoneError"</span>:&nbsp;<span class="hljs-string">"2"</span><br><span class="linenum hljs-number">6</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">8</span>}<br></code></pre>
+<hr>
+<h3 id="h-10"><span>购买微信或电话</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=trade.consume</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>必须参数，秘钥</td>
+</tr>
+<tr>
+<td>type</td>
+<td>必须参数，报错类型（wechat/phone）</td>
+</tr>
+<tr>
+<td>topicid</td>
+<td>必须参数，爱贴ID</td>
+</tr>
+<tr>
+<td>gold</td>
+<td>必须参数，金币值</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>必须参数，发布者ID</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>xx.xxx.xx.xx/?s=trade.consume&amp;amp;token=b2c3eQyDEfkzs4QY7CG0I6cfZq91e2VF0QBCuvkH3AZQgNNjQE2T9WLXycrTLovkrl2lH8KQ%2FIQtUH9xINo&amp;amp;type=phone&amp;amp;topicid=2&amp;amp;gold=9&amp;amp;uid=2</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<h3 id="h-11"><span>点赞贴吧</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=topic.priase</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>必须参数，秘钥</td>
+</tr>
+<tr>
+<td>topicid</td>
+<td>必须参数，爱贴ID</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>http://xx.xxx.xx.xx/?s=topic.priase&amp;amp;token=b2c3eQyDEfkzs4QY7CG0I6cfZq91e2VF0QBCuvkH3AZQgNNjQE2T9WLXycrTLovkrl2lH8KQ%2FIQtUH9xINo&amp;amp;topicid=2</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"rs"</span>:&nbsp;<span class="hljs-number">1</span><br><span class="linenum hljs-number">5</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">7</span>}<br></code></pre>
+<h3 id="h-12"><span>我的发布</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=topic.myPublish</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>必须参数，秘钥</td>
+</tr>
+<tr>
+<td>page</td>
+<td>必须参数，当前页</td>
+</tr>
+<tr>
+<td>pagesize</td>
+<td>必须参数，每页显示数量</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>http://xx.xxx.xx.xx/?s=topic.myPublish&amp;amp;pagesize=3&amp;amp;page=1&amp;amp;token=7d45H8srUk8BzXfrrOlyMxoGDiseCs6VFHeUj79IJ0CaYwwYmSh%2B7qf2z%2BaY79YfryaZ9Rv6DzEJIrZlnmU</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number"> 1</span>{<br><span class="linenum hljs-number"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number"> 3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[<br><span class="linenum hljs-number"> 4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br><span class="linenum hljs-number"> 5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"topicid"</span>:&nbsp;<span class="hljs-string">"7"</span>,<br><span class="linenum hljs-number"> 6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"uid"</span>:&nbsp;<span class="hljs-string">"1"</span>,<br><span class="linenum hljs-number"> 7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"title"</span>:&nbsp;<span class="hljs-string">"lx的发布测试"</span>,<br><span class="linenum hljs-number"> 8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"location"</span>:&nbsp;<span class="hljs-string">"天惠路湿地公园"</span>,<br><span class="linenum hljs-number"> 9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-string">"qqcom"</span>,<br><span class="linenum hljs-number">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatgold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatError"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phone"</span>:&nbsp;<span class="hljs-string">"18223698745"</span>,<br><span class="linenum hljs-number">13</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonegold"</span>:&nbsp;<span class="hljs-string">"8"</span>,<br><span class="linenum hljs-number">14</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phoneError"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"content"</span>:&nbsp;<span class="hljs-string">"lx的发布测试lx的发布测试lx的发布测试lx的发布测试lx的发布测试lx的发布测试lx的发布测试lx的发布测试"</span>,<br><span class="linenum hljs-number">16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"collectnum"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">17</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"praise"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">18</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"imagelist"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">19</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"create_time"</span>:&nbsp;<span class="hljs-string">"2018-10-24&nbsp;16:46:48"</span>,<br><span class="linenum hljs-number">20</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"username"</span>:&nbsp;<span class="hljs-string">"lx"</span>,<br><span class="linenum hljs-number">21</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"userimage"</span>:&nbsp;<span class="hljs-literal">null</span><br><span class="linenum hljs-number">22</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">23</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br><span class="linenum hljs-number">24</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"topicid"</span>:&nbsp;<span class="hljs-string">"6"</span>,<br><span class="linenum hljs-number">25</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"uid"</span>:&nbsp;<span class="hljs-string">"1"</span>,<br><span class="linenum hljs-number">26</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"title"</span>:&nbsp;<span class="hljs-string">"我的发布测试1"</span>,<br><span class="linenum hljs-number">27</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"location"</span>:&nbsp;<span class="hljs-string">"天惠路"</span>,<br><span class="linenum hljs-number">28</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-string">"chenggang"</span>,<br><span class="linenum hljs-number">29</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatgold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">30</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatError"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">31</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phone"</span>:&nbsp;<span class="hljs-string">"18979580123"</span>,<br><span class="linenum hljs-number">32</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonegold"</span>:&nbsp;<span class="hljs-string">"8"</span>,<br><span class="linenum hljs-number">33</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phoneError"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">34</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"content"</span>:&nbsp;<span class="hljs-string">"11我的发布测试我的发布测试我的发布测试"</span>,<br><span class="linenum hljs-number">35</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"collectnum"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">36</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"praise"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">37</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"imagelist"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">38</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"create_time"</span>:&nbsp;<span class="hljs-string">"2018-10-24&nbsp;16:44:47"</span>,<br><span class="linenum hljs-number">39</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"username"</span>:&nbsp;<span class="hljs-string">"lx"</span>,<br><span class="linenum hljs-number">40</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"userimage"</span>:&nbsp;<span class="hljs-literal">null</span><br><span class="linenum hljs-number">41</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><span class="linenum hljs-number">42</span>&nbsp;&nbsp;&nbsp;&nbsp;],<br><span class="linenum hljs-number">43</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">44</span>}<br></code></pre>
+<h3 id="h-13"><span>删除我发布的贴吧</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=user.delPublish</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>必须参数，秘钥</td>
+</tr>
+<tr>
+<td>topicids</td>
+<td>必须参数，要删除的贴子id，格式：topicids=1,2,3,4,5,6,7，用英文逗号拼接</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>http://xx.xxx.xx.xx/?s=user.delPublish&amp;amp;topicids=1,2,3,4,5,6,7&amp;amp;token=7d45H8srUk8BzXfrrOlyMxoGDiseCs6VFHeUj79IJ0CaYwwYmSh%2B7qf2z%2BaY79YfryaZ9Rv6DzEJIrZlnmU</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"rs"</span>:&nbsp;<span class="hljs-number">2</span><br><span class="linenum hljs-number">5</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br></code></pre>
+<h3 id="h-14"><span>我的收藏</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=user.myCollection</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>必须参数，秘钥</td>
+</tr>
+<tr>
+<td>page</td>
+<td>必须参数，页数</td>
+</tr>
+<tr>
+<td>pagesize</td>
+<td>必须参数，每页显示多少条</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>xx.xxx.xx.xx/?s=user.myCollection&amp;amp;token=7d45H8srUk8BzXfrrOlyMxoGDiseCs6VFHeUj79IJ0CaYwwYmSh%2B7qf2z%2BaY79YfryaZ9Rv6DzEJIrZlnmU&amp;amp;page=2&amp;amp;pagesize=2</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number"> 1</span>{<br><span class="linenum hljs-number"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number"> 3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[<br><span class="linenum hljs-number"> 4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br><span class="linenum hljs-number"> 5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"topicid"</span>:&nbsp;<span class="hljs-string">"1"</span>,<br><span class="linenum hljs-number"> 6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"uid"</span>:&nbsp;<span class="hljs-string">"2"</span>,<br><span class="linenum hljs-number"> 7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"title"</span>:&nbsp;<span class="hljs-string">"部落冲突"</span>,<br><span class="linenum hljs-number"> 8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"location"</span>:&nbsp;<span class="hljs-string">"珠江新城"</span>,<br><span class="linenum hljs-number"> 9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-string">"chenggang"</span>,<br><span class="linenum hljs-number">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatgold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatError"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phone"</span>:&nbsp;<span class="hljs-string">"18979580123"</span>,<br><span class="linenum hljs-number">13</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonegold"</span>:&nbsp;<span class="hljs-string">"8"</span>,<br><span class="linenum hljs-number">14</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phoneError"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"content"</span>:&nbsp;<span class="hljs-string">"部落冲突好好玩部落冲突好好玩"</span>,<br><span class="linenum hljs-number">16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"collectnum"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">17</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"praise"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">18</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"imagelist"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">19</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"create_time"</span>:&nbsp;<span class="hljs-string">"2018-10-23&nbsp;17:41:44"</span>,<br><span class="linenum hljs-number">20</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"username"</span>:&nbsp;<span class="hljs-string">"lx"</span><br><span class="linenum hljs-number">21</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">22</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br><span class="linenum hljs-number">23</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"topicid"</span>:&nbsp;<span class="hljs-string">"2"</span>,<br><span class="linenum hljs-number">24</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"uid"</span>:&nbsp;<span class="hljs-string">"2"</span>,<br><span class="linenum hljs-number">25</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"title"</span>:&nbsp;<span class="hljs-string">"夜跑珠江"</span>,<br><span class="linenum hljs-number">26</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"location"</span>:&nbsp;<span class="hljs-string">"珠江新城"</span>,<br><span class="linenum hljs-number">27</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-string">"bdchen"</span>,<br><span class="linenum hljs-number">28</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatgold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">29</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatError"</span>:&nbsp;<span class="hljs-string">"4"</span>,<br><span class="linenum hljs-number">30</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phone"</span>:&nbsp;<span class="hljs-string">"18270634643"</span>,<br><span class="linenum hljs-number">31</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonegold"</span>:&nbsp;<span class="hljs-string">"8"</span>,<br><span class="linenum hljs-number">32</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phoneError"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">33</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"content"</span>:&nbsp;<span class="hljs-string">"夜跑珠江好好玩"</span>,<br><span class="linenum hljs-number">34</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"collectnum"</span>:&nbsp;<span class="hljs-string">"3"</span>,<br><span class="linenum hljs-number">35</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"praise"</span>:&nbsp;<span class="hljs-string">"3"</span>,<br><span class="linenum hljs-number">36</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"imagelist"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">37</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"create_time"</span>:&nbsp;<span class="hljs-string">"2018-10-23&nbsp;17:42:43"</span>,<br><span class="linenum hljs-number">38</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"username"</span>:&nbsp;<span class="hljs-string">"lx"</span><br><span class="linenum hljs-number">39</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><span class="linenum hljs-number">40</span>&nbsp;&nbsp;&nbsp;&nbsp;],<br><span class="linenum hljs-number">41</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">42</span>}<br></code></pre>
+<h3 id="h-15"><span>购买历史</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=user.consumeHistory</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>必须参数，秘钥</td>
+</tr>
+<tr>
+<td>page</td>
+<td>必须参数，页数</td>
+</tr>
+<tr>
+<td>pagesize</td>
+<td>必须参数，每页显示多少条</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>http://xx.xxx.xx.xx/?s=user.consumeHistory&amp;amp;token=7d45H8srUk8BzXfrrOlyMxoGDiseCs6VFHeUj79IJ0CaYwwYmSh%2B7qf2z%2BaY79YfryaZ9Rv6DzEJIrZlnmU&amp;amp;page=1&amp;amp;pagesize=2</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number"> 1</span>{<br><span class="linenum hljs-number"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number"> 3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[<br><span class="linenum hljs-number"> 4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br><span class="linenum hljs-number"> 5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"topicid"</span>:&nbsp;<span class="hljs-string">"2"</span>,<br><span class="linenum hljs-number"> 6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"uid"</span>:&nbsp;<span class="hljs-string">"2"</span>,<br><span class="linenum hljs-number"> 7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"title"</span>:&nbsp;<span class="hljs-string">"夜跑珠江"</span>,<br><span class="linenum hljs-number"> 8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"location"</span>:&nbsp;<span class="hljs-string">"珠江新城"</span>,<br><span class="linenum hljs-number"> 9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-string">"bdchen"</span>,<br><span class="linenum hljs-number">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatgold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatError"</span>:&nbsp;<span class="hljs-string">"4"</span>,<br><span class="linenum hljs-number">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phone"</span>:&nbsp;<span class="hljs-string">"18270634643"</span>,<br><span class="linenum hljs-number">13</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonegold"</span>:&nbsp;<span class="hljs-string">"8"</span>,<br><span class="linenum hljs-number">14</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phoneError"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"content"</span>:&nbsp;<span class="hljs-string">"夜跑珠江好好玩"</span>,<br><span class="linenum hljs-number">16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"collectnum"</span>:&nbsp;<span class="hljs-string">"3"</span>,<br><span class="linenum hljs-number">17</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"praise"</span>:&nbsp;<span class="hljs-string">"3"</span>,<br><span class="linenum hljs-number">18</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"imagelist"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">19</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"create_time"</span>:&nbsp;<span class="hljs-string">"2018-10-23&nbsp;17:42:43"</span>,<br><span class="linenum hljs-number">20</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"username"</span>:&nbsp;<span class="hljs-string">"lx"</span><br><span class="linenum hljs-number">21</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><span class="linenum hljs-number">22</span>&nbsp;&nbsp;&nbsp;&nbsp;],<br><span class="linenum hljs-number">23</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">24</span>}<br></code></pre>
+<h3 id="h-16"><span>查询我的金币</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=user.myGold</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>必须参数，秘钥</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>http://xx.xxx.xx.xx/?s=user.myGold&amp;amp;token=7d45H8srUk8BzXfrrOlyMxoGDiseCs6VFHeUj79IJ0CaYwwYmSh%2B7qf2z%2BaY79YfryaZ9Rv6DzEJIrZlnmU</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"gold"</span>:&nbsp;<span class="hljs-string">"1"</span><br><span class="linenum hljs-number">5</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">7</span>}<br></code></pre>
+<h3 id="h-17"><span>个人主页</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=user.homePage</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uid</td>
+<td>必须参数，发布者ID</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>http://xx.xxx.xx.xx/?s=user.homePage&amp;amp;uid=5</code></li></ul></li>
+<li><p>返回结果</p>
+<ul>
+<li><span>正确返回结果</span></li></ul></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number"> 1</span>{<br><span class="linenum hljs-number"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number"> 3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;{<br><span class="linenum hljs-number"> 4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"username"</span>:&nbsp;<span class="hljs-string">"火"</span>,<br><span class="linenum hljs-number"> 5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"userimage"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number"> 6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"sex"</span>:&nbsp;<span class="hljs-string">"保密"</span>,<br><span class="linenum hljs-number"> 7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"gold"</span>:&nbsp;<span class="hljs-string">"10"</span><br><span class="linenum hljs-number"> 8</span>&nbsp;&nbsp;&nbsp;&nbsp;},<br><span class="linenum hljs-number"> 9</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">10</span>}<br></code></pre>
+<ul>
+<li><span>错误返回结果</span></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number">1</span>{<br><span class="linenum hljs-number">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">400</span>,<br><span class="linenum hljs-number">3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[],<br><span class="linenum hljs-number">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">"非法请求：缺少必要参数发布者ID"</span><br><span class="linenum hljs-number">5</span>}<br></code></pre>
+<h3 id="h-18"><span>用户发布的贴吧</span></h3>
+<ul>
+<li><p>访问地址<br><code>http://xx.xxx.xx.xx/?s=user.userPublish</code></p></li>
+<li><p>请求参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page</td>
+<td>必须参数，页数</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>必须参数，发布者ID</td>
+</tr>
+<tr>
+<td>pagesize</td>
+<td>必须参数，每页显示条数</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>请求方法</p>
+<ul>
+<li><span>POST</span></li>
+<li>GET<br><code>http://xx.xxx.xx.xx/?s=user.userPublish&amp;amp;uid=5&amp;amp;page=1&amp;amp;pagesize=2</code></li></ul></li>
+<li><p>返回结果</p></li>
+</ul>
+<pre><code class="hljs json"><span class="linenum hljs-number"> 1</span>{<br><span class="linenum hljs-number"> 2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"ret"</span>:&nbsp;<span class="hljs-number">200</span>,<br><span class="linenum hljs-number"> 3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"data"</span>:&nbsp;[<br><span class="linenum hljs-number"> 4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br><span class="linenum hljs-number"> 5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"topicid"</span>:&nbsp;<span class="hljs-string">"4"</span>,<br><span class="linenum hljs-number"> 6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"uid"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number"> 7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"title"</span>:&nbsp;<span class="hljs-string">"哈哈哈"</span>,<br><span class="linenum hljs-number"> 8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"location"</span>:&nbsp;<span class="hljs-string">"广州天河"</span>,<br><span class="linenum hljs-number"> 9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechat"</span>:&nbsp;<span class="hljs-string">"21676"</span>,<br><span class="linenum hljs-number">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatgold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"wechatError"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phone"</span>:&nbsp;<span class="hljs-string">"646"</span>,<br><span class="linenum hljs-number">13</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phonegold"</span>:&nbsp;<span class="hljs-string">"5"</span>,<br><span class="linenum hljs-number">14</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"phoneError"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">15</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"content"</span>:&nbsp;<span class="hljs-string">"chj塌右日韩救星嘲吃亏是福kfjk显而易见时时患者嘻嘻喷雾器哮喘过滤器哮喘賷喷雾器"</span>,<br><span class="linenum hljs-number">16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"collectnum"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">17</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"praise"</span>:&nbsp;<span class="hljs-string">"0"</span>,<br><span class="linenum hljs-number">18</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"imagelist"</span>:&nbsp;<span class="hljs-literal">null</span>,<br><span class="linenum hljs-number">19</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"create_time"</span>:&nbsp;<span class="hljs-string">"2018-10-24&nbsp;15:42:45"</span>,<br><span class="linenum hljs-number">20</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"username"</span>:&nbsp;<span class="hljs-string">"火"</span>,<br><span class="linenum hljs-number">21</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"userimage"</span>:&nbsp;<span class="hljs-literal">null</span><br><span class="linenum hljs-number">22</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><span class="linenum hljs-number">23</span>&nbsp;&nbsp;&nbsp;&nbsp;],<br><span class="linenum hljs-number">24</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">"msg"</span>:&nbsp;<span class="hljs-string">""</span><br><span class="linenum hljs-number">25</span>}<br></code></pre></div></div></body>
+</html>
